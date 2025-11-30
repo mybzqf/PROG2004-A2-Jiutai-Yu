@@ -1,4 +1,44 @@
-public class Ride {
+public class Ride implements RideInterface{
+    @Override
+    public void addVisitorToQueue(Visitor visitor) {
+
+    }
+
+    @Override
+    public void removeVisitorFromQueue() {
+
+    }
+
+    @Override
+    public void printQueue() {
+
+    }
+
+    @Override
+    public void addVisitorToHistory(Visitor visitor) {
+
+    }
+
+    @Override
+    public boolean checkVisitorFromHistory(Visitor visitor) {
+        return false;
+    }
+
+    @Override
+    public int numberOfVisitors() {
+        return 0;
+    }
+
+    @Override
+    public void printRideHistory() {
+
+    }
+
+    @Override
+    public void runOneCycle() {
+
+    }
+
     private Employee operator;
     private String rideName;
     private String rideType;
