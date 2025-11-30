@@ -1,5 +1,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Iterator;
+import java.util.Collections;
 
 public class Ride implements RideInterface {
     // Basic attributes (defined in Part1)
@@ -10,10 +12,14 @@ public class Ride implements RideInterface {
     // Part3: Waiting line (stores visitors waiting for the ride)
     private Queue<Visitor> waitingLine;
 
+    // Part4: Ride history (stores visitors who have ridden)
+    private LinkedList<Visitor> rideHistory;
+
 
     // Constructors
     public Ride() {
         this.waitingLine = new LinkedList<>();
+        this.rideHistory = new LinkedList<>();
     }
 
     public Ride(Employee operator, String rideName, String rideType) {
@@ -21,6 +27,7 @@ public class Ride implements RideInterface {
         this.rideName = rideName;
         this.rideType = rideType;
         this.waitingLine = new LinkedList<>();
+        this.rideHistory = new LinkedList<>();
     }
 
 
@@ -89,25 +96,68 @@ public class Ride implements RideInterface {
     }
 
 
-    // Empty implementations for other interface methods (to be filled in later parts)
+    // Part4: Implement ride history methods
     @Override
     public void addVisitorToHistory(Visitor visitor) {
+        if (visitor != null) {
+            rideHistory.add(visitor);
+            System.out.println("Successfully added visitor [" + visitor.getName() + "] to the ride history of [" + rideName + "]");
+        } else {
+            System.out.println("Failed to add: Visitor information is empty");
+        }
     }
 
     @Override
     public boolean checkVisitorFromHistory(Visitor visitor) {
+        if (visitor == null) {
+            System.out.println("Check failed: Visitor information is empty");
+            return false;
+        }
+        for (Visitor v : rideHistory) {
+            if (v.getVisitorTicketId().equals(visitor.getVisitorTicketId())) {
+                System.out.println("Check result: Visitor [" + visitor.getName() + "] exists in the ride history of [" + rideName + "]");
+                return true;
+            }
+        }
+        System.out.println("Check result: Visitor [" + visitor.getName() + "] does NOT exist in the ride history of [" + rideName + "]");
         return false;
     }
 
     @Override
     public int numberOfVisitors() {
-        return 0;
+        int count = rideHistory.size();
+        System.out.println("Total visitors in ride history of [" + rideName + "]: " + count);
+        return count;
     }
 
     @Override
     public void printRideHistory() {
+        System.out.println("=== Ride History Details of [" + rideName + "] ===");
+        if (rideHistory.isEmpty()) {
+            System.out.println("No visitors in the ride history");
+            return;
+        }
+        Iterator<Visitor> iterator = rideHistory.iterator();
+        int index = 1;
+        while (iterator.hasNext()) {
+            Visitor visitor = iterator.next();
+            System.out.println(index + ". Name: " + visitor.getName()
+                    + " | Age: " + visitor.getAge()
+                    + " | Ticket ID: " + visitor.getVisitorTicketId()
+                    + " | Visit Date: " + visitor.getVisitDate());
+            index++;
+        }
+        System.out.println("==============================");
     }
 
+    // Part4B: Sort ride history by age then ticket ID
+    public void sortRideHistory() {
+        Collections.sort(rideHistory, new VisitorComparator());
+        System.out.println("Ride history of [" + rideName + "] has been sorted by age (ascending) then ticket ID (ascending)");
+    }
+
+
+    // Part5: To be implemented later
     @Override
     public void runOneCycle() {
     }
