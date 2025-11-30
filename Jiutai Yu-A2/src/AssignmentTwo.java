@@ -1,7 +1,7 @@
 public class AssignmentTwo {
     public static void main(String[] args) {
         AssignmentTwo app = new AssignmentTwo();
-        app.partFourB(); // 测试排序功能
+        app.partFive(); // 运行Part5骑行周期测试，可切换为partThree/partFourA/partFourB
     }
 
     // Part3: Waiting Line Test
@@ -114,8 +114,44 @@ public class AssignmentTwo {
         rollerCoaster.printRideHistory();
     }
 
-    // Placeholders for other part methods
+    // Part5: Ride Cycle Test
+    public void partFive() {
+        System.out.println("=== Part5 Ride Cycle Test ===");
+
+        // 1. Create an operator
+        Employee op = new Employee("Zhang San", 30, "44010119950101", "EMP001", "Morning Shift");
+
+        // 2. Create a ride (max 2 riders per cycle)
+        Ride rollerCoaster = new Ride(op, "Roller Coaster", "Thrilling", 2);
+
+        // 3. Add 5 visitors to waiting line
+        Visitor v1 = new Visitor("Li Si", 25, "44010119980101", "T001", "2025-12-01");
+        Visitor v2 = new Visitor("Wang Wu", 32, "44010119910101", "T002", "2025-12-01");
+        Visitor v3 = new Visitor("Zhao Liu", 18, "44010120060101", "T003", "2025-12-01");
+        Visitor v4 = new Visitor("Sun Qi", 45, "44010119800101", "T004", "2025-12-01");
+        Visitor v5 = new Visitor("Zhou Ba", 22, "44010120020101", "T005", "2025-12-01");
+        rollerCoaster.addVisitorToQueue(v1);
+        rollerCoaster.addVisitorToQueue(v2);
+        rollerCoaster.addVisitorToQueue(v3);
+        rollerCoaster.addVisitorToQueue(v4);
+        rollerCoaster.addVisitorToQueue(v5);
+
+        // 4. Print initial waiting line
+        System.out.println("\n--- Initial Waiting Line ---");
+        rollerCoaster.printQueue();
+
+        // 5. Run 2 ride cycles
+        rollerCoaster.runOneCycle();
+        rollerCoaster.runOneCycle();
+
+        // 6. Print final waiting line & ride history
+        System.out.println("\n--- Final Waiting Line ---");
+        rollerCoaster.printQueue();
+        System.out.println("\n--- Ride History After Cycles ---");
+        rollerCoaster.printRideHistory();
+    }
+
+    // Placeholders for subsequent parts
     public void partSix() {}
     public void partSeven() {}
-    public void partFive() {}
 }
