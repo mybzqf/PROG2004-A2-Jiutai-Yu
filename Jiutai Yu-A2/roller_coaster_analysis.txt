@@ -1,0 +1,7 @@
+=== Ride Data Analysis Report - Roller Coaster ===
+Report Date: 2025-12-01
+Total Riders: 4
+Average Age: 30.00
+Youngest Visitor: Zhao Liu (Age: 18)
+Oldest Visitor: Sun Qi (Age: 45)
+Total Cycles: 2

@@ -1,16 +1,15 @@
-// RideInterface.java（接口）
 public interface RideInterface {
-    // Part3：队列方法
+    // Part3: Waiting line methods
     void addVisitorToQueue(Visitor visitor);
     void removeVisitorFromQueue();
     void printQueue();
 
-    // Part4：历史方法
+    // Part4: Ride history methods
     void addVisitorToHistory(Visitor visitor);
     boolean checkVisitorFromHistory(Visitor visitor);
     int numberOfVisitors();
     void printRideHistory();
 
-    // Part5：运行方法
+    // Part5: Ride cycle method
     void runOneCycle();
 }
