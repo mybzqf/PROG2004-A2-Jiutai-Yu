@@ -1,0 +1,29 @@
+=== Ride History Report - Roller Coaster ===
+Export Date: 2025-12-01
+Total Completed Cycles: 2
+Max Riders Per Cycle: 2
+
+Record 1:
+  Name: Li Si
+  Age: 25
+  Ticket ID: T001
+  Visit Date: 2025-12-01
+
+Record 2:
+  Name: Wang Wu
+  Age: 32
+  Ticket ID: T002
+  Visit Date: 2025-12-01
+
+Record 3:
+  Name: Zhao Liu
+  Age: 18
+  Ticket ID: T003
+  Visit Date: 2025-12-01
+
+Record 4:
+  Name: Sun Qi
+  Age: 45
+  Ticket ID: T004
+  Visit Date: 2025-12-01
+

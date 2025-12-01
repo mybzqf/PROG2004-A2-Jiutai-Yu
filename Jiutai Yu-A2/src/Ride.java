@@ -2,6 +2,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Iterator;
 import java.util.Collections;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 
 public class Ride implements RideInterface {
     // Core attributes (Part 1)
@@ -218,5 +221,31 @@ public class Ride implements RideInterface {
         System.out.println("Total completed cycles: " + this.completedCycleCount);
         System.out.println("Riders processed this cycle: " + ridersProcessed);
         System.out.println("Remaining visitors in waiting line: " + waitingLine.size());
+    }
+
+    // Part 6: Export ride history to text file
+    public void exportHistoryToFile(String filePath) {
+        System.out.println("\n=== Exporting Ride History to File: " + filePath + " ===");
+        try (FileWriter writer = new FileWriter(filePath)) {
+            // Write file header
+            writer.write("=== Ride History Report - " + rideName + " ===\n");
+            writer.write("Export Date: " + LocalDate.now() + "\n");
+            writer.write("Total Completed Cycles: " + completedCycleCount + "\n");
+            writer.write("Max Riders Per Cycle: " + maxRidersPerCycle + "\n\n");
+
+            // Write visitor records
+            int recordNum = 1;
+            for (Visitor visitor : rideHistory) {
+                writer.write("Record " + recordNum + ":\n");
+                writer.write("  Name: " + visitor.getName() + "\n");
+                writer.write("  Age: " + visitor.getAge() + "\n");
+                writer.write("  Ticket ID: " + visitor.getVisitorTicketId() + "\n");
+                writer.write("  Visit Date: " + visitor.getVisitDate() + "\n\n");
+                recordNum++;
+            }
+            System.out.println("Success: Ride history exported to " + filePath);
+        } catch (IOException e) {
+            System.out.println("Error exporting history: " + e.getMessage());
+        }
     }
 }

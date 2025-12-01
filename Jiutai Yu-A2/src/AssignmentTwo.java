@@ -1,7 +1,7 @@
 public class AssignmentTwo {
     public static void main(String[] args) {
         AssignmentTwo app = new AssignmentTwo();
-        app.partFive(); // 运行Part5骑行周期测试，可切换为partThree/partFourA/partFourB
+        app.partSix(); // Run Part6 file export test
     }
 
     // Part3: Waiting Line Test
@@ -151,7 +151,36 @@ public class AssignmentTwo {
         rollerCoaster.printRideHistory();
     }
 
+    // Part6: Export Ride History to File Test
+    public void partSix() {
+        System.out.println("=== Part6 Export History to File Test ===");
+
+        // 1. Create operator and ride
+        Employee op = new Employee("Zhang San", 30, "44010119950101", "EMP001", "Morning Shift");
+        Ride rollerCoaster = new Ride(op, "Roller Coaster", "Thrilling", 2);
+
+        // 2. Create and add visitors to queue
+        Visitor v1 = new Visitor("Li Si", 25, "44010119980101", "T001", "2025-12-01");
+        Visitor v2 = new Visitor("Wang Wu", 32, "44010119910101", "T002", "2025-12-01");
+        Visitor v3 = new Visitor("Zhao Liu", 18, "44010120060101", "T003", "2025-12-01");
+        Visitor v4 = new Visitor("Sun Qi", 45, "44010119800101", "T004", "2025-12-01");
+        rollerCoaster.addVisitorToQueue(v1);
+        rollerCoaster.addVisitorToQueue(v2);
+        rollerCoaster.addVisitorToQueue(v3);
+        rollerCoaster.addVisitorToQueue(v4);
+
+        // 3. Run 2 cycles to generate history
+        rollerCoaster.runOneCycle();
+        rollerCoaster.runOneCycle();
+
+        // 4. Export history to file (project root directory)
+        rollerCoaster.exportHistoryToFile("roller_coaster_history.txt");
+
+        // 5. Verify export by printing history
+        System.out.println("\n--- Verify Exported Data ---");
+        rollerCoaster.printRideHistory();
+    }
+
     // Placeholders for subsequent parts
-    public void partSix() {}
     public void partSeven() {}
 }
