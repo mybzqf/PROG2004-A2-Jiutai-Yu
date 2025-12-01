@@ -21,7 +21,7 @@ public class Ride implements RideInterface {
     private LinkedList<Visitor> rideHistory;
 
     // Part 5: Ride cycle configuration
-    private int maxRider; // 按作业要求命名（单周期最大游客数）
+    private int maxRider;
     private int completedCycleCount; // Total finished cycles
 
 
@@ -173,7 +173,6 @@ public class Ride implements RideInterface {
         return totalVisitors;
     }
 
-    // Part 4A: printRideHistory (强制使用Iterator，符合作业要求)
     @Override
     public void printRideHistory() {
         System.out.println("\n=== Ride History - " + rideName + " ===");
@@ -181,7 +180,6 @@ public class Ride implements RideInterface {
             System.out.println("No visitors in ride history");
             return;
         }
-        // 必须使用Iterator遍历
         Iterator<Visitor> iterator = rideHistory.iterator();
         int index = 1;
         while (iterator.hasNext()) {
@@ -237,16 +235,14 @@ public class Ride implements RideInterface {
         System.out.println("Remaining visitors in waiting line: " + waitingLine.size());
     }
 
-    // Part 6: Export ride history to CSV file (匹配Part7导入格式)
+    // Part 6: Export ride history to CSV file
     public void exportHistoryToFile(String filePath) {
         System.out.println("\n=== Exporting Ride History to CSV File: " + filePath + " ===");
         try (FileWriter writer = new FileWriter(filePath)) {
-            // 写入文件头（便于识别，导入时跳过）
             writer.write("=== Ride History Report - " + rideName + " ===\n");
             writer.write("Export Date: " + LocalDate.now() + "\n");
             writer.write("Name,Age,TicketID,VisitDate\n"); // CSV列标题
 
-            // 按CSV格式写入每条游客数据（逗号分隔）
             for (Visitor visitor : rideHistory) {
                 writer.write(visitor.getName() + ","
                         + visitor.getAge() + ","
@@ -259,28 +255,24 @@ public class Ride implements RideInterface {
         }
     }
 
-    // Part 7: Import ride history from CSV file (符合作业要求)
+    // Part 7: Import ride history from CSV file
     public void importRideHistory(String filePath) {
         System.out.println("\n=== Importing Ride History from File: " + filePath + " ===");
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            // 跳过文件头（Part6导出时的“=== Ride History Report ...”行）
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("===") || line.startsWith("Export Date:") || line.isEmpty()) {
-                    continue; // 跳过非数据行
+                    continue;
                 }
-                // 按CSV格式分割（匹配Part6的导出格式）
                 String[] data = line.split(",");
                 if (data.length != 4) {
                     System.out.println("Skipping invalid line: " + line);
                     continue;
                 }
-                // 解析数据并创建Visitor对象（匹配Visitor类的构造器）
                 String name = data[0];
                 int age = Integer.parseInt(data[1]);
                 String ticketId = data[2];
                 String visitDate = data[3];
-                // 假设Visitor构造器为：Visitor(String name, int age, String id, String ticketId, String visitDate)
                 Visitor visitor = new Visitor(name, age, "default-id", ticketId, visitDate);
                 rideHistory.add(visitor);
             }
